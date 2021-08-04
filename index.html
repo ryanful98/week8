@@ -11,7 +11,7 @@
  	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
    	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    	crossorigin=""></script>
-   	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+   	
    	<script src="js/leaflet-providers.js"></script>
    	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -35,20 +35,28 @@
 		maxZoom: 18,
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
-		$.getJSON("nolabikeshare.geojson",function(data){
-			L.geoJSON(data, {
+		$.getJSON("nolabikeshare.geoJSON",function(data){
+			L.geoJSON(nolabikes, 
+	 {
 				pointToLayer: function(feature, latlng) {
+				var bikecolor;
+				var bikepp = feature.properties.Site_Type;
+				if ( bikepp == "On-Street" ) bikecolor = "#f03b20";
+				else bikecolor = "#1c9099";
 				return new L.CircleMarker(latlng, 
 				{	radius: 2,
 					fillOpacity: 2,
-					fillColor: 'red',
-					color: 'red',
+					fillColor: 'bikecolor',
 					weight: .5, 
 				});
-			}
+			},
+			onEachFeature: function(feature, layer){
+			layer.bindPopup("<strong>"+ feature.properties.Station_Name + "</strong><br/>" + "Location:" + feature.properties.Site_Type + "<br/>" + "Station Number: " + feature.properties.Station_Number)
+		}
 				}).addTo(map);
 		
 		 });
 
 </script>
+		
 		
