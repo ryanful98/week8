@@ -1,2 +1,2 @@
 # week8
-This is just a test for the week 8 project
+This repository covers the final week of class for UPP 465. It includes the HTML file containing the final codes, another HTML file contaitning a similar (defunct) code, the CSS file containing the styling code, and this READ ME document. The final code shows a map of the city of New Orleans with points indicating locations of bike share pickups. There are popups which indicate the name and address of each location, and the points are color-coded to show the status of the locations - red points indicate the pickup is on private property, while blue indicates public locations (either on sidewalks or streets). 
