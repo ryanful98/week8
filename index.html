@@ -35,7 +35,7 @@
 		maxZoom: 18,
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
-		$.getJSON("nolabikeshare.geoJSON",function(data){
+		$.getJSON("nolabikeshare.geojson",function(data){
 			L.geoJSON(data, {
 				pointToLayer: function(feature, latlng) {
 				return new L.CircleMarker(latlng, 
