@@ -35,27 +35,26 @@
 		maxZoom: 18,
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
-		$.getJSON("nolabikeshare.geoJSON",function(data){
-			L.geoJSON(nolabikes, 
-	 {
-				pointToLayer: function(feature, latlng) {
-				var bikecolor;
-				var bikepp = feature.properties.Site_Type;
-				if ( bikepp == "On-Street" ) bikecolor = "#f03b20";
-				else bikecolor = "#1c9099";
-				return new L.CircleMarker(latlng, 
+	$.getJSON("nolabikeshare.geojson",function(data){
+	L.geoJSON(data, {
+		pointToLayer: function(feature, latlng) {
+			var bikecolor;
+			var bikeapp = feature.properties.Site_Type;
+			if ( bikeapp == "Private Property" ) bikecolor = "red";
+			else bikecolor = "blue";
+			return new L.CircleMarker(latlng, 
 				{	radius: 2,
 					fillOpacity: 2,
-					fillColor: 'bikecolor',
+					fillColor: bikecolor,
+					color: 'orange',
 					weight: .5, 
 				});
-			},
-			onEachFeature: function(feature, layer){
-			layer.bindPopup("<strong>"+ feature.properties.Station_Name + "</strong><br/>" + "Location:" + feature.properties.Site_Type + "<br/>" + "Station Number: " + feature.properties.Station_Number)
+		},
+		onEachFeature: function(feature, layer){
+			layer.bindPopup("<strong>"+ feature.properties.Site_Name + "</strong><br/>" + "Location :" + feature.properties.Site_Type + "<br/>" + "Station Number: " + feature.properties.Station_Number)
 		}
-				}).addTo(map);
-		
-		 });
+			}).addTo(map);
+		});
 
 </script>
 		
